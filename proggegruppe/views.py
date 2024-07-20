@@ -21,7 +21,18 @@ def course(request, course):
             "course": course,
             "titles": courses_title,
             "courses": courses,
-            "lessons": lessons
+            "lessons": lessons,
             })
     else:
          return render(request, "proggegruppe/404.html")
+     
+def lessons(request, course):
+    return render(request, "proggegruppe/lessons.html", {
+        "course": course,
+    })
+    
+def lesson(request, course, lesson):
+    return render (request, "proggegruppe/lesson.html", {
+        "course": course,
+        "lesson": lesson,
+    })
