@@ -1,7 +1,7 @@
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
-from .utils import get_all_courses, get_all_course_titles, get_lessons_by_course_title
+from .utils import get_all_courses, get_all_course_titles, get_lessons_by_course_title, get_course_by_title
 
 # Create your views here.
 
@@ -13,14 +13,13 @@ def courses(request):
 
 def course(request, course):
     lessons = get_lessons_by_course_title(course.capitalize())
-    courses = get_all_courses()
+    fetched_course = get_course_by_title(course.capitalize())
     courses_title = get_all_course_titles()
     # courses_stripped = [c.strip() for c in courses]
     if course.capitalize() in courses_title:
         return render(request, "proggegruppe/course.html", {
-            "course": course,
+            "course": fetched_course,
             "titles": courses_title,
-            "courses": courses,
             "lessons": lessons,
             })
     else:

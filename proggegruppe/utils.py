@@ -8,6 +8,13 @@ def get_all_courses():
 def get_all_course_titles():
     return Course.objects.values_list("title", flat=True)
 
+def get_course_by_title(course_title):
+    try:
+        course = Course.objects.get(title=course_title)
+        return course
+    except ObjectDoesNotExist:
+        return None
+
 
 def get_lessons_by_course_title(course_title):
     try:

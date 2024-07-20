@@ -2,21 +2,15 @@
 
 {% block body %}
 
-    {{ course }}
+    <h1>{{ course.title }}</h1>
+    <h3>Description</h3>
+    <p>{{ course.description }}</p>
 
-    {% for c in courses %}
-    
-        <p>{{ c.title }}</p>
-        <p>{{ c.language }}</p>
-        <p>{{ c.description }}</p>
 
-    {% endfor %}
-
+    <h3>Lessons</h3>
     <ul>
     {% for lesson in lessons %}
-        <h3>{{ lesson.title }}</h3>
-        <li>{{ lesson.description }}</li>
-        <li>{{ lesson.content }}</li>
+        <li>{{ lesson.title }}</li>
     {% endfor %}
     </ul>
 {% endblock %}
