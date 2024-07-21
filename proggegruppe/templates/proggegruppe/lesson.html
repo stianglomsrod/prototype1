@@ -2,6 +2,18 @@
 
 {% block body %}
 
-    Lesson
+    
+    <h2>{{ lesson.title }}</h2>
+    <h3>Description</h3>
+    <p>{{ lesson.description }}</p>
+    <h3>Content</h3>
+    <p>{{ lesson.content }}</p>
 
+    <ul>
+    {% for task in tasks %}
+    
+        <li><a href="{% url 'task' course lesson.id task.id %}">Task {{ task.id }} </a></li>
+    
+    {% endfor %}
+    </ul>
 {% endblock %}

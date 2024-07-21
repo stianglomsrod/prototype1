@@ -1,7 +1,7 @@
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
-from .utils import get_all_courses, get_all_course_titles, get_lessons_by_course_title, get_course_by_title
+from .utils import *
 
 # Create your views here.
 
@@ -9,7 +9,10 @@ def index(request):
     return render(request, "proggegruppe/index.html")
 
 def courses(request):
-    return render(request, "proggegruppe/courses.html")
+    courses = get_all_courses()
+    return render(request, "proggegruppe/courses.html", {
+        "courses": courses
+    })
 
 def course(request, course):
     lessons = get_lessons_by_course_title(course.capitalize())
@@ -30,8 +33,20 @@ def lessons(request, course):
         "course": course,
     })
     
-def lesson(request, course, lesson):
+def lesson(request, course, lesson_id):
+    tasks = get_tasks_by_lesson_id(lesson_id)
+    lesson = get_lesson_by_id(lesson_id)
     return render (request, "proggegruppe/lesson.html", {
         "course": course,
         "lesson": lesson,
+        "tasks": tasks,
+    })
+
+def task(request, course, lesson_id, task_id):
+    task = get_task_by_id(task_id)
+    lesson = get_lesson_by_id(lesson_id)
+    return render(request, "proggegruppe/task.html", {
+        "course": course,
+        "lesson": lesson,
+        "task": task,
     })

@@ -2,6 +2,17 @@
 
 {% block body %}
 
-    Task
+    <h1>{{ lesson }}</h1>
+    <h3>Task {{ task.id }}</h3>
+    <h4>Description</h4>
+    <p>{{ task.description }}</p>
+    <h4>Code Snippet</h4>
+    <p>{{ task.code_snippet }}</p>
+    <h4>Hints</h4>
+    <p>{{ task.hints }}</p>
+    <h4>Solution</h4>
+    <p>{{ task.solution }}</p>
+    <h4>Points</h4>
+    <p>{{ task.points }}</p>
 
 {% endblock %}

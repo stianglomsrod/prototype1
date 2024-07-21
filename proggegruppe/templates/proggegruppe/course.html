@@ -9,8 +9,8 @@
 
     <h3>Lessons</h3>
     <ul>
-    {% for lesson in lessons %}
-        <li>{{ lesson.title }}</li>
+    {% for l in lessons %}
+        <li><a href="{% url 'lesson' course.title l.id %}">{{ l.title }}</a></li>
     {% endfor %}
     </ul>
 {% endblock %}
