@@ -8,8 +8,8 @@
     <p>{{ task.description }}</p>
     <h4>Code Snippet</h4>
     <form>
-        <label for="inputfield">{{ task.code_snippet }}</label>
-        <input id="inputfield" type="text" {{ task.field_attributes }}>
+        <p>{{ task.code_snippet | safe}}</p>
+        {% comment %} <input id="inputfield" type="text" {{ task.field_attributes }}> {% endcomment %}
     </form>
 
     <h4>Hints</h4>
