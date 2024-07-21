@@ -7,12 +7,18 @@
     <h4>Description</h4>
     <p>{{ task.description }}</p>
     <h4>Code Snippet</h4>
-    <p>{{ task.code_snippet }}</p>
+    <form>
+        <label for="inputfield">{{ task.code_snippet }}</label>
+        <input id="inputfield" type="text" {{ task.field_attributes }}>
+    </form>
+
     <h4>Hints</h4>
     <p>{{ task.hints }}</p>
     <h4>Solution</h4>
     <p>{{ task.solution }}</p>
     <h4>Points</h4>
     <p>{{ task.points }}</p>
+
+
 
 {% endblock %}

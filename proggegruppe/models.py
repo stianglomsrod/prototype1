@@ -35,6 +35,10 @@ class Task(models.Model):
     lesson = models.ForeignKey(Lesson, related_name='tasks', on_delete=models.CASCADE)
     description = models.TextField()
     code_snippet = models.TextField()
+    
+    field_attributes = models.TextField(null=True, blank=True)
+    hidden_attributes = models.TextField(null=True, blank=True)
+    
     hints = models.TextField(null=True, blank=True)
     solution = models.TextField()
     points = models.PositiveIntegerField()
