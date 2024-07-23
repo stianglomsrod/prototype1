@@ -1,5 +1,5 @@
 from django.core.exceptions import ObjectDoesNotExist
-from .models import Course, Lesson, Task
+from .models import Course, Lesson, Task, TaskField
 
 
 def get_all_courses():
@@ -64,6 +64,13 @@ def get_task_by_id(task_id):
     except ObjectDoesNotExist:
         return None
     
+def get_field_by_task_id(task_id):
+    try:
+        task = Task.objects.get(id=task_id)
+        fields = TaskField.objects.filter(task=task)
+        return fields
+    except ObjectDoesNotExist:
+        return None
     
 def get_lesson_by_id(lesson_id):
     try:
