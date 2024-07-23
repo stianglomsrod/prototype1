@@ -5,17 +5,28 @@
     <h1>{{ lesson }}</h1>
     <h3>Task {{ task.id }}</h3>
     <h4>Description</h4>
-    <p>{{ task.description }}</p>
+    <p>{{ task.description | safe }}</p>
     <h4>Code Snippet</h4>
-    <form>
-        <label for="inputfield">{{ task.code_snippet }}</label>
-        <input id="inputfield" type="text" {{ task.field_attributes }}>
+    <form action = "" method="post">
+    {% csrf_token %}
+    {% for field in fields %}
+        
+        <label for="field{{ field.id }}">{{ field.code_snippet }}</label>
+        <input id="field{{ field.id }}" type="text" {{ field.field_attributes }}>
+        <em>{{ field.instruction }}</em>
+        <br>
+        <br>
+    {% endfor %}
+    {% for c in conditionals %}
+        <p>{{ c }}</p>
+    {% endfor %}
+    <input type="submit">
     </form>
 
     <h4>Hints</h4>
-    <p>{{ task.hints }}</p>
+    <p>{{ task.hints | safe }}</p>
     <h4>Solution</h4>
-    <p>{{ task.solution }}</p>
+    <p>{{ task.solution | safe }}</p>
     <h4>Points</h4>
     <p>{{ task.points }}</p>
 

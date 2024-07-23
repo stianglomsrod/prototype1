@@ -43,10 +43,24 @@ def lesson(request, course, lesson_id):
     })
 
 def task(request, course, lesson_id, task_id):
+    fields = get_field_by_task_id(task_id)
     task = get_task_by_id(task_id)
     lesson = get_lesson_by_id(lesson_id)
-    return render(request, "proggegruppe/task.html", {
-        "course": course,
-        "lesson": lesson,
-        "task": task,
+    conditionals = []
+    for field in fields:
+        conditionals.append(field.conditionals)
+        
+    if request.method == ["POST"]:
+        fields_amount = len(fields)
+        
+        for i in range(fields_amount):
+            ...
+    
+    else:
+        return render(request, "proggegruppe/task.html", {
+            "course": course,
+            "lesson": lesson,
+            "task": task,
+            "fields": fields,
+            "conditionals": conditionals
     })

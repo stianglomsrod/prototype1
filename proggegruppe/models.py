@@ -33,18 +33,26 @@ class Lesson(models.Model):
 # Task model
 class Task(models.Model):
     lesson = models.ForeignKey(Lesson, related_name='tasks', on_delete=models.CASCADE)
+    title = models.CharField(max_length=200)
     description = models.TextField()
-    code_snippet = models.TextField()
-    
-    field_attributes = models.TextField(null=True, blank=True)
-    hidden_attributes = models.TextField(null=True, blank=True)
-    
     hints = models.TextField(null=True, blank=True)
     solution = models.TextField()
     points = models.PositiveIntegerField()
 
     def __str__(self):
-        return f"Task for {self.lesson.title}"
+        return f"{self.title} for {self.lesson.title}"
+
+class TaskField(models.Model):
+    task = models.ForeignKey(Task, related_name='fields', on_delete=models.CASCADE)
+    instruction = models.TextField(null=True, blank=True)
+    field_attributes = models.TextField(null=True, blank=True)
+    hidden_attributes = models.TextField(null=True, blank=True)
+    code_snippet = models.TextField()
+    conditionals = models.TextField(null= True, blank=True)
+
+    
+    def __str__(self):
+        return f"Field for {self.task.title} in lesson {self.task.lesson.title}"
 
 # Submission model
 class Submission(models.Model):
