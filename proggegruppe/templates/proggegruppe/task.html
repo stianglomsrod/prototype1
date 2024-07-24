@@ -20,6 +20,11 @@
     {% for c in conditionals %}
         <p>{{ c }}</p>
     {% endfor %}
+    {% if task.has_ide == True %}
+    
+        <iframe {{ task.iframe_parameters }}></iframe>
+
+    {% endif %}
     <input type="submit">
     </form>
 

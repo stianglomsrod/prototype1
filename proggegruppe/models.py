@@ -38,6 +38,8 @@ class Task(models.Model):
     hints = models.TextField(null=True, blank=True)
     solution = models.TextField()
     points = models.PositiveIntegerField()
+    has_ide = models.BooleanField(default=False)
+    iframe_parameters = models.TextField(null=True, blank=True)
 
     def __str__(self):
         return f"{self.title} for {self.lesson.title}"
