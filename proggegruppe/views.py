@@ -89,8 +89,8 @@ def task_submit(request, course, lesson_id, task_id):
             "conditionals": conditionals,
             'message': message
     })
-                
-        task = task_id + 1
+             
+        task = get_task_by_id((task_id + fields_amount))
         return render(request, "proggegruppe/task", {
             "course": course,
             "lesson": lesson,
