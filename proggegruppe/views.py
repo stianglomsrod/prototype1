@@ -47,14 +47,15 @@ def task(request, course, lesson_id, task_id):
     task = get_task_by_id(task_id)
     lesson = get_lesson_by_id(lesson_id)
     conditionals = []
+    fields_amount = len(fields)
+    message = ""
     for field in fields:
-        conditionals.append(field.conditionals)
+        conditionals.append(field.conditionals) 
         
     if request.method == ["POST"]:
-        fields_amount = len(fields)
-        
         for i in range(fields_amount):
-            ...
+            if not conditionals[i]:
+                message = "Try again"
     
     else:
         return render(request, "proggegruppe/task.html", {
@@ -62,5 +63,41 @@ def task(request, course, lesson_id, task_id):
             "lesson": lesson,
             "task": task,
             "fields": fields,
-            "conditionals": conditionals
+            "conditionals": conditionals,
+            'message': message
     })
+        
+def task_submit(request, course, lesson_id, task_id):
+    fields = get_field_by_task_id(task_id)
+    task = get_task_by_id(task_id)
+    lesson = get_lesson_by_id(lesson_id)
+    conditionals = []
+    fields_amount = len(fields)
+    message = "Try again"
+    for field in fields:
+        conditionals.append(field.conditionals) 
+        
+    if request.method == ["POST"]:
+        for i in range(fields_amount):
+            if not conditionals[i]:
+                message = "Try again"
+                return render(request, "proggegruppe/task.html", {
+            "course": course,
+            "lesson": lesson,
+            "task": task,
+            "fields": fields,
+            "conditionals": conditionals,
+            'message': message
+    })
+                
+        task = task_id + 1
+        return render(request, "proggegruppe/task", {
+            "course": course,
+            "lesson": lesson,
+            "task": task,
+            "fields": fields,
+            "conditionals": conditionals,
+            'message': message    
+        })
+
+        

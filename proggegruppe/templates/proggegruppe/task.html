@@ -7,7 +7,7 @@
     <h4>Description</h4>
     <p>{{ task.description | safe }}</p>
     <h4>Code Snippet</h4>
-    <form action = "" method="post">
+    <form action = "{% url 'task_submit' course.title lesson.id task.id %}" method="post">
     {% csrf_token %}
     {% for field in fields %}
         
@@ -16,7 +16,12 @@
         <em>{{ field.instruction }}</em>
         <br>
         <br>
-    {% endfor %}
+    {% endfor %}  
+
+    {{ message }}
+
+    <input type="submit" value="Next">
+    
     {% for c in conditionals %}
         <p>{{ c }}</p>
     {% endfor %}
@@ -25,8 +30,6 @@
         <iframe {{ task.iframe_parameters }}></iframe>
 
     {% endif %}
-    <input type="submit">
-    </form>
 
     <h4>Hints</h4>
     <p>{{ task.hints | safe }}</p>

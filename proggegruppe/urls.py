@@ -9,4 +9,5 @@ urlpatterns = [
     path("courses/<str:course>/lessons", views.lessons, name="lessons"),
     path("courses/<str:course>/<int:lesson_id>", views.lesson, name="lesson"),
     path("courses/<str:course>/<int:lesson_id>/<int:task_id>", views.task, name="task"),
+    path("courses/<str:course>/<int:lesson_id>/<int:task_id>", views.task_submit, name="task_submit"),
 ]
