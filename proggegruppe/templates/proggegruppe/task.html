@@ -7,19 +7,20 @@
     <h4>Description</h4>
     <p>{{ task.description | safe }}</p>
     <h4>Code Snippet</h4>
-    <form action = "{% url 'task_submit' course.title lesson.id task.id %}" method="post">
+    <form action = "{% url 'task' course lesson.id task.id %}" method="post">
     {% csrf_token %}
     {% for field in fields %}
         
         <label for="field{{ field.id }}">{{ field.code_snippet }}</label>
-        <input id="field{{ field.id }}" type="text" {{ field.field_attributes }}>
+        <input id="field{{ field.id }}" name="field{{ field.id }}" type="text" {{ field.field_attributes }}>
         <em>{{ field.instruction }}</em>
         <br>
         <br>
     {% endfor %}  
 
-    {{ message }}
-
+  
+         {{ message }}
+   
     <input type="submit" value="Next">
     
     {% for c in conditionals %}

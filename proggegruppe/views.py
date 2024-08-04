@@ -43,19 +43,26 @@ def lesson(request, course, lesson_id):
     })
 
 def task(request, course, lesson_id, task_id):
-    fields = get_field_by_task_id(task_id)
+    fields = get_fields_by_task_id(task_id)
     task = get_task_by_id(task_id)
     lesson = get_lesson_by_id(lesson_id)
     conditionals = []
     fields_amount = len(fields)
     message = ""
+    
+    
     for field in fields:
         conditionals.append(field.conditionals) 
         
-    if request.method == ["POST"]:
-        for i in range(fields_amount):
-            if not conditionals[i]:
-                message = "Try again"
+    if request.method == "POST":
+        for c in conditionals:
+            try:
+                z = eval(c)
+                if not z:      
+                    return HttpResponse("Criteria not met")       
+            except ValueError:
+                return HttpResponse("Criteria not met (Value error)")           
+        return HttpResponse("Criteria met")
     
     else:
         return render(request, "proggegruppe/task.html", {
@@ -68,7 +75,7 @@ def task(request, course, lesson_id, task_id):
     })
         
 def task_submit(request, course, lesson_id, task_id):
-    fields = get_field_by_task_id(task_id)
+    fields = get_fields_by_task_id(task_id)
     task = get_task_by_id(task_id)
     lesson = get_lesson_by_id(lesson_id)
     conditionals = []
